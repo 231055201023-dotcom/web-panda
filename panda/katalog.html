@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panda Entertainment - Profil Perusahaan</title>
+<style>
+  /* ===== VARIABEL WARNA — TEMA BIRU MEWAH ===== */
+  :root {
+    --primary: #38bdf8;
+    --secondary: #6366f1;
+    --bg-dark: #0a1628;
+    --bg-card: #132441;
+    --bg-nav: rgba(10, 22, 40, 0.95);
+    --border: #1e3a5f;
+    --text-main: #eff6ff;
+    --text-muted: #7d9bc1;
+    --text-light: #dbeafe;
+    --gradient-hero: radial-gradient(circle at 50% 30%, #162238 0%, #0a1628 70%);
+    --gradient-accent: linear-gradient(90deg, #38bdf8, #6366f1);
+    --gradient-avatar: linear-gradient(135deg, #38bdf8, #6366f1);
+    --gradient-blue: linear-gradient(90deg, #22d3ee, #3b82f6, #8b5cf6);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+
+  /* ===== PENGAMAN GLOBAL UKURAN GAMBAR ===== */
+  img.logo-img, img.hero-logo, img.footer-logo, img.team-avatar {
+    display: block;
+    object-fit: contain;
+  }
+  img.logo-img { width: 45px !important; height: 45px !important; max-width: 45px !important; max-height: 45px !important; }
+  img.hero-logo { width: 180px !important; height: 180px !important; max-width: 180px !important; max-height: 180px !important; }
+  img.footer-logo { width: 40px !important; height: 40px !important; max-width: 40px !important; max-height: 40px !important; margin: 0 auto 10px; opacity: 0.8; }
+  img.team-avatar { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: center top !important; border-radius: 50% !important; }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top: 0; width: 100%; background: var(--bg-nav);
+    backdrop-filter: blur(10px); padding: 12px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 1000; border-bottom: 2px solid var(--border);
+  }
+  nav .logo { font-size: 1.3rem; font-weight: bold; display: flex; align-items: center; gap: 12px; }
+  nav .logo img.logo-img {
+    border-radius: 50%; background: rgba(255,255,255,0.05); padding: 3px;
+    border: 2px solid var(--primary); transition: 0.3s; flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  }
+  nav .logo img.logo-img:hover { transform: rotate(10deg) scale(1.1); border-color: var(--secondary); box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); }
+  nav .logo .logo-fallback {
+    width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; background: var(--gradient-avatar); flex-shrink: 0; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  }
+  nav .logo .brand-text {
+    background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; font-weight: bold;
+  }
+  nav ul { display: flex; list-style: none; gap: 25px; }
+  nav ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: 0.3s; cursor: pointer; }
+  nav ul li a:hover { color: var(--primary); text-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 100px 20px 60px; background: var(--gradient-hero);
+  }
+  .hero .hero-logo { animation: bounce 2s infinite; filter: drop-shadow(0 10px 40px rgba(56, 189, 248, 0.45)) drop-shadow(0 0 20px rgba(99, 102, 241, 0.3)); }
+  .hero .panda-emoji { font-size: 5rem; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  .hero h1 {
+    font-size: 3rem; margin: 20px 0 10px; background: var(--gradient-blue);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
+  }
+  .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 30px; }
+  .hero .btn {
+    padding: 12px 30px; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff;
+    border: none; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer;
+    transition: 0.3s; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+  }
+  .hero .btn:hover { background: linear-gradient(135deg, #22d3ee, #8b5cf6); transform: scale(1.05); box-shadow: 0 6px 30px rgba(56, 189, 248, 0.6); }
+
+  /* ===== SECTION ===== */
+  section { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+  section h2 { font-size: 2rem; margin-bottom: 10px; color: var(--text-main); text-align: center; }
+  section .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 50px; }
+
+  /* ===== ABOUT ===== */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .about-text p { margin-bottom: 15px; line-height: 1.8; color: var(--text-light); }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stat-card {
+    background: var(--bg-card); padding: 25px; border-radius: 15px; text-align: center;
+    border: 1px solid var(--border); transition: 0.3s;
+  }
+  .stat-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2); }
+  .stat-card .number { font-size: 2rem; font-weight: bold; color: var(--primary); text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+  .stat-card .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+
+  /* ===== SERVICES ===== */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+  .service-card {
+    background: var(--bg-card); padding: 30px; border-radius: 15px;
+    border: 1px solid var(--border); transition: 0.3s;
+  }
+  .service-card:hover { border-color: var(--secondary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2); }
+  .service-card .icon { font-size: 2.5rem; margin-bottom: 15px; }
+  .service-card h3 { color: var(--text-main); margin-bottom: 10px; }
+  .service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* ===== TEAM ===== */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+  .team-card {
+    background: var(--bg-card); padding: 30px 20px; border-radius: 15px;
+    text-align: center; border: 1px solid var(--border); transition: 0.3s;
+  }
+  .team-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15); }
+  .team-card .avatar {
+    width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 15px;
+    overflow: hidden; background: linear-gradient(135deg, #38bdf8, #6366f1);
+    display: flex; justify-content: center; align-items: center;
+    font-size: 2rem; font-weight: bold; color: #fff;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); border: 2px solid var(--primary); transition: 0.3s;
+  }
+  .team-card:hover .avatar { border-color: var(--secondary); box-shadow: 0 0 25px rgba(99, 102, 241, 0.6); transform: scale(1.05); }
+  .team-card h3 { color: var(--text-main); margin-bottom: 5px; }
+  .team-card .role { color: var(--primary); font-size: 0.85rem; }
+
+  /* ========================================================= */
+  /* ===== TALENT SECTION (KATEGORI & DETAIL) ===== */
+  /* ========================================================= */
+  
+  /* ===== BANNER FOTO GRUP UTAMA (LANDSCAPE) ===== */
+  .talent-banner {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 40px; /* Jarak antara banner dan kartu grup */
+    border: 2px solid var(--border);
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .talent-banner img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    transition: 0.5s ease;
+  }
+  .talent-banner:hover img { transform: scale(1.03); }
+  .talent-banner::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 50%; background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* 1. Card Kategori Grup (Landscape) */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+  }
+  .group-card {
+    background: var(--bg-card); border-radius: 15px; overflow: hidden;
+    border: 1px solid var(--border); transition: 0.3s; cursor: pointer;
+  }
+  .group-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 40px rgba(56, 189, 248, 0.25); }
+  .group-card .group-thumb {
+    height: 220px; width: 100%; overflow: hidden; background: linear-gradient(135deg, #1e3a5f, #0a1628);
+    display: flex; justify-content: center; align-items: center;
+    font-size: 4rem; font-weight: bold; color: rgba(255,255,255,0.1);
+  }
+  .group-card .group-thumb img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center; transition: 0.4s;
+  }
+  .group-card:hover .group-thumb img { transform: scale(1.05); }
+  .group-card .group-info { padding: 20px; text-align: center; }
+  .group-card .group-info h3 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 5px; }
+  .group-card .group-info p { color: var(--text-muted); font-size: 0.9rem; }
+
+  /* 2. Tampilan Detail Talent */
+  .talent-detail-header {
+    text-align: center; margin-bottom: 40px; padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+  .talent-detail-header h3 { font-size: 2.2rem; color: var(--primary); margin-bottom: 10px; }
+  .talent-detail-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+  }
+  .portfolio-card {
+    background: var(--bg-card); border-radius: 15px; overflow: hidden;
+    border: 1px solid var(--border); transition: 0.3s; cursor: pointer;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-5px); border-color: var(--secondary);
+    box-shadow: 0 15px 40px rgba(56, 189, 248, 0.25);
+  }
+  .portfolio-card .thumb {
+    height: 340px; display: flex; justify-content: center; align-items: center;
+    font-size: 4rem; background: linear-gradient(135deg, #162238, #0a1628);
+    overflow: hidden; position: relative;
+  }
+  .portfolio-card .thumb img.thumb-img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    display: block; transition: 0.4s ease;
+  }
+  .portfolio-card:hover .thumb img.thumb-img { transform: scale(1.08); }
+  .portfolio-card .info { padding: 20px; }
+  .portfolio-card .info h3 { color: var(--text-main); margin-bottom: 5px; }
+  .portfolio-card .info .tag {
+    display: inline-block; background: linear-gradient(90deg, #38bdf8, #6366f1);
+    color: #fff; padding: 3px 12px; border-radius: 20px; font-size: 0.75rem;
+    font-weight: bold; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+  }
+  .portfolio-card .info p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+
+  /* Tombol Kembali */
+  .btn-back {
+    display: inline-block; margin-bottom: 20px; padding: 8px 20px;
+    background: transparent; color: var(--primary); border: 1px solid var(--primary);
+    border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold;
+    text-decoration: none;
+  }
+  .btn-back:hover { background: var(--primary); color: var(--bg-dark); }
+
+  /* ===== CONTACT ===== */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .contact-info p { color: var(--text-light); margin-bottom: 20px; line-height: 1.8; }
+  .contact-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
+  .contact-item .icon { font-size: 1.5rem; }
+  .contact-item .detail strong { display: block; color: var(--text-main); margin-bottom: 3px; }
+  .contact-item .detail span { color: var(--text-muted); font-size: 0.9rem; }
+  form { background: var(--bg-card); padding: 30px; border-radius: 15px; border: 1px solid var(--border); }
+  form input, form textarea {
+    width: 100%; padding: 12px; background: var(--bg-dark); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text-main); margin-bottom: 15px; font-size: 0.95rem; outline: none; transition: 0.3s;
+  }
+  form input:focus, form textarea:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+  form button {
+    width: 100%; padding: 12px; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff;
+    border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer;
+    transition: 0.3s; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+  }
+  form button:hover { background: linear-gradient(135deg, #22d3ee, #8b5cf6); box-shadow: 0 6px 25px rgba(56, 189, 248, 0.5); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 30px; background: #071020; color: var(--text-muted);
+    font-size: 0.85rem; border-top: 1px solid rgba(56, 189, 248, 0.3);
+  }
+
+  /* ===== MODAL ===== */
+  .modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+  }
+  .modal.active { display: flex; }
+  .modal-content {
+    background: var(--bg-card); padding: 40px; border-radius: 20px; max-width: 540px; width: 100%;
+    text-align: center; border: 2px solid rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.3); animation: pop 0.3s ease;
+  }
+  @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-content .big-icon { font-size: 3rem; margin-bottom: 15px; }
+  .modal-content .big-icon img.modal-img {
+    max-width: 360px; max-height: 360px; width: auto; height: auto; object-fit: contain;
+    border-radius: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 25px rgba(56, 189, 248, 0.3);
+  }
+  .modal-content h3 { color: var(--text-main); margin-bottom: 10px; }
+  .modal-content p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+  .modal-content button {
+    padding: 10px 30px; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff;
+    border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;
+  }
+  .modal-content button:hover { background: linear-gradient(135deg, #22d3ee, #8b5cf6); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 12px 20px; flex-direction: column; gap: 10px; }
+    nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .hero h1 { font-size: 2rem; }
+    img.hero-logo { width: 130px !important; height: 130px !important; max-width: 130px !important; max-height: 130px !important; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 20px; }
+    .portfolio-card .thumb { height: 240px; }
+    .modal-content .big-icon img.modal-img { max-width: 280px; max-height: 280px; }
+    .group-card .group-thumb { height: 180px; }
+    .talent-banner { height: 200px; margin-bottom: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="assets/images/logo-panda.png" alt="Logo Panda Entertainment" class="logo-img" onerror="this.outerHTML='<div class=\'logo-fallback\'>🐼</div>'">
+    <span class="brand-text">Panda Entertainment</span>
+  </div>
+  <ul>
+    <li><a onclick="scrollToSection('about')">Tentang</a></li>
+    <li><a onclick="scrollToSection('services')">Layanan</a></li>
+    <li><a onclick="scrollToSection('team')">Tim</a></li>
+    <li><a onclick="scrollToSection('portfolio')">Talent</a></li>
+    <li><a onclick="scrollToSection('contact')">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="assets/images/logo-panda.png" alt="Panda Entertainment Logo" class="hero-logo" onerror="this.outerHTML='<div class=\'panda-emoji\'>🐼</div>'">
+  <h1>Panda Entertainment</h1>
+  <p>Grow ● Perform ● Paid</p>
+  <button class="btn" onclick="scrollToSection('about')">Jelajahi Profil Kami</button>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>Tentang Kami</h2>
+  <p class="subtitle">Siapa di balik Panda Entertainment?</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <p><strong>Panda Entertainment</strong> adalah perusahaan hiburan terkemuka yang berdiri sejak tahun 2025. Kami berfokus pada produksi konten kreatif, manajemen artis, penyelenggaraan event, serta distribusi musik dan film.</p>
+      <p>Dengan semangat inovasi dan kolaborasi, kami telah menghadirkan ratusan karya yang menghibur jutaan penonton di Indonesia dan Asia Tenggara.</p>
+      <p>Visi kami: <em>"Menjadi rumah bagi kreator berbakat dan menghadirkan hiburan yang menginspirasi."</em></p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="number" data-target="150">0</div><div class="label">Proyek Selesai</div></div>
+      <div class="stat-card"><div class="number" data-target="50">0</div><div class="label">Artis & Kreator</div></div>
+      <div class="stat-card"><div class="number" data-target="10">0</div><div class="label">Tahun Pengalaman</div></div>
+      <div class="stat-card"><div class="number" data-target="25">0</div><div class="label">Penghargaan</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Layanan Kami</h2>
+  <p class="subtitle">Apa saja yang kami tawarkan?</p>
+  <div class="services-grid">
+    <div class="service-card"><div class="icon">🎵</div><h3>Produksi Musik</h3><p>Rekaman, mixing, mastering, dan distribusi musik ke platform digital global.</p></div>
+    <div class="service-card"><div class="icon">🎬</div><h3>Produksi Film & Video</h3><p>Pembuatan film pendek, iklan, dan konten digital dengan kualitas sinematik.</p></div>
+    <div class="service-card"><div class="icon">🎤</div><h3>Manajemen Artis</h3><p>Pengelolaan karier artis, branding, dan jadwal penampilan profesional.</p></div>
+    <div class="service-card"><div class="icon">🎪</div><h3>Event Organizer</h3><p>Penyelenggaraan konser, festival, dan acara perusahaan berskala besar.</p></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <h2>Tim Kami</h2>
+  <p class="subtitle">Orang-orang di balik kesuksesan Panda Entertainment</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="avatar"><img src="assets/images/hengky.jpg" alt="Hengky Ciao" class="team-avatar" onerror="this.outerHTML='HC'"></div>
+      <h3>Hengky Ciao</h3><div class="role">CEO & Founder</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar"><img src="assets/images/depri.jpeg" alt="Depri Syah" class="team-avatar" onerror="this.outerHTML='DS'"></div>
+      <h3>Depri Syah</h3><div class="role">Creative Director</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar"><img src="assets/images/viona.jpg" alt="Viona" class="team-avatar" onerror="this.outerHTML='V'"></div>
+      <h3>Viona</h3><div class="role">Human Resource Development</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar"><img src="assets/images/rina.jpg" alt="Rina Novita" class="team-avatar" onerror="this.outerHTML='RN'"></div>
+      <h3>Rina Novita</h3><div class="role">Marketing Manager</div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUP DANCE / PORTFOLIO -->
+<section id="portfolio">
+  <h2>GROUP DANCE</h2>
+  <p class="subtitle">Group Agensi Kami — Klik Untuk Detail</p>
+  
+  <!-- 🌟 BANNER FOTO GRUP UTAMA DI SINI -->
+  <div class="talent-banner">
+    <img src="assets/images/banner-talent.jpg" alt="Panda Entertainment Talent Group" onerror="this.style.display='none'">
+  </div>
+  <!-- 🌟 AKHIR BANNER -->
+
+  <!-- Tempat JavaScript memunculkan konten Grup -->
+  <div id="talentContainer"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Hubungi Kami</h2>
+  <p class="subtitle">Mari bekerja sama!</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Kami selalu terbuka untuk kolaborasi, pertanyaan, maupun ide baru. Hubungi kami melalui saluran berikut:</p>
+      <div class="contact-item"><div class="icon">📍</div><div class="detail"><strong>Alamat</strong><span>Komplek Ruko Palm Spring Blok C1 No.10, Taman Baloi, Batam Kota</span></div></div>
+      <div class="contact-item"><div class="icon">📞</div><div class="detail"><strong>Telepon</strong><span>+62 831-6482-8675</span></div></div>
+      <div class="contact-item"><div class="icon">✉️</div><div class="detail"><strong>Email</strong><span>info@pandaentertainment.com</span></div></div>
+      <div class="contact-item"><div class="icon">🌐</div><div class="detail"><strong>Website</strong><span>www.pandaentertainment.com</span></div></div>
+    </div>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Nama Lengkap" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="4" placeholder="Pesan Anda..." required></textarea>
+      <button type="submit">Kirim Pesan 🚀</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="assets/images/logo-panda.png" alt="Panda Logo" class="footer-logo" onerror="this.style.display='none'">
+  <br>© 2026 Panda Entertainment. Semua hak dilindungi.
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="big-icon" id="modalIcon">🎬</div>
+    <h3 id="modalTitle">Judul</h3>
+    <p id="modalDesc">Deskripsi</p>
+    <button onclick="closeModal()">Tutup</button>
+  </div>
+</div>
+
+<script>
+  // ========================================================
+  // DATA MASTER (Grup & Talent)
+  // ========================================================
+  const groupsData = [
+    {
+      id: "babypandaa.6",
+      name: "Babypanda.6",
+      description: "Girl Group",
+      cover: "baby panda.jpeg",
+      members: [
+        { icon: "ginny.png", title: "GINNY", tag: "Leader", desc: "Ginny Merupakan Leader Dari GirlGroup Baby Panda Pada Sebuah Agensi." },
+        { icon: "kenzy.png", title: "KENZY", tag: "Talent", desc: "Talent Dari Baby Panda." },
+        { icon: "🌟", title: "CESSE", tag: "Talent", desc: "Talent Dari Baby Panda." },
+        { icon: "🌸", title: "OLINA", tag: "Talent", desc: "Talent Dari Baby Panda." },
+        { icon: "🦋", title: "GRACE", tag: "Talent", desc: "Talent Dari Baby Panda." },
+        { icon: "💫", title: "ZRIEL", tag: "Talent", desc: "Talent Dari Baby Panda." }
+      ]
+    },
+    {
+      id: "Hi.five_id",
+      name: "HI FIVE BOY’S",
+      description: "Dance Group",
+      cover: "hifive.jpeg",
+      members: [
+        { icon: "👦", title: "BUDI", tag: "Leader", desc: "Leader dari Highfive." },
+        { icon: "👦", title: "ANDI", tag: "Vocalist", desc: "Vokalis utama Highfive." },
+        { icon: "👦", title: "CACA", tag: "Dancer", desc: "Dancer andalan Highfive." }
+      ]
+    },
+    {
+      id: "noyaofficial_",
+      name: "Noya_official",
+      description: "Dance Group ",
+      cover: "noya.jpeg",
+      members: [
+        { icon: "🌟", title: "TALENT 1", tag: "Leader", desc: "Talent dari grup Noya." },
+        { icon: "🌸", title: "TALENT 2", tag: "Member", desc: "Talent dari grup Noya." }
+      ]
+    },
+    {
+      id: "Official.izme7",
+      name: "Official.izme7",
+      description: "Dance Group Official.izme7",
+      cover: "izme.jpeg",
+      members: [
+        { icon: "💫", title: "TALENT 1", tag: "Leader", desc: "Talent dari grup Official.izme7." },
+        { icon: "🦋", title: "TALENT 2", tag: "Member", desc: "Talent dari grup Official.izme7." }
+      ]
+    },
+    {
+      id: "RS7.Official2_",
+      name: "RS7.Official2_",
+      description: "Talent Trainee",
+      cover: "rs7.jpeg",
+      members: [
+        { icon: "🎓", title: "TRAINEE 1", tag: "Trainee", desc: "Talent pelatihan dari Panda Entertainment." },
+        { icon: "🎓", title: "TRAINEE 2", tag: "Trainee", desc: "Talent pelatihan dari Panda Entertainment." }
+      ]
+    },
+    {
+      // 🌟 GRUP BARU DITAMBAHKAN DI SINI
+      id: "svnkingdoms.official_",
+      name: "Svnkingdoms.Official_",
+      description: "Dance Group Baru",
+      cover: "svn.jpeg", // Pastikan nama file foto ini ada di folder assets/images/
+      members: [
+        { icon: "✨", title: "TALENT 1", tag: "Leader", desc: "Talent dari grup New Star." },
+        { icon: "⭐", title: "TALENT 2", tag: "Member", desc: "Talent dari grup New Star." },
+        { icon: "🌠", title: "TALENT 3", tag: "Member", desc: "Talent dari grup New Star." }
+      ]
+    }
+  ];
+  
+
+  const container = document.getElementById('talentContainer');
+
+  // ========================================================
+  // FUNGSI BANTU
+  // ========================================================
+  function isImageFile(str) {
+    return /\.(png|jpe?g|gif|webp|svg|bmp|avif)$/i.test(str);
+  }
+
+  // ========================================================
+  // TAHAP 1: RENDER KATEGORI GRUP (Card Landscape)
+  // ========================================================
+  function renderGroups() {
+    let html = `<div class="groups-grid">`;
+    
+    groupsData.forEach(group => {
+      // Cek apakah cover adalah gambar
+      const isImg = isImageFile(group.cover);
+      // Jika gambar, render <img>. Jika tidak ada gambar, render teks inisial nama grup
+      const coverHtml = isImg 
+        ? `<img src="assets/images/${group.cover}" alt="${group.name}" onerror="this.style.display='none'">` 
+        : `<span>${group.name.substring(0, 2).toUpperCase()}</span>`;
+
+      html += `
+        <div class="group-card" onclick="window.location.hash = '${group.id}'">
+          <div class="group-thumb">
+            ${coverHtml}
+          </div>
+          <div class="group-info">
+            <h3>${group.name}</h3>
+            <p>${group.description} • ${group.members.length} Talent</p>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    container.innerHTML = html;
+  }
+
+  // ========================================================
+  // TAHAP 2: RENDER DETAIL TALENT DARI GRUP YANG DIPILIH
+  // ========================================================
+  function renderTalentDetail(groupId) {
+    const group = groupsData.find(g => g.id === groupId);
+    if(!group) {
+      renderGroups();
+      return;
+    }
+
+    let html = `
+      <a href="#portfolio" class="btn-back" onclick="window.location.hash = ''">← Kembali ke Daftar Grup</a>
+      <div class="talent-detail-header">
+        <h3>${group.name}</h3>
+        <p>${group.description}</p>
+      </div>
+      <div class="portfolio-grid">
+    `;
+
+    group.members.forEach((item) => {
+      const thumbContent = isImageFile(item.icon)
+        ? `<img src="assets/images/${item.icon}" alt="${item.title}" class="thumb-img"
+                onerror="this.outerHTML='<div style=\\'font-size:4rem;\\'>🖼️</div>'">`
+        : item.icon;
+
+      html += `
+        <div class="portfolio-card" onclick="openModal('${item.title}', '${item.desc.replace(/'/g, "\\'")}', '${item.icon}')">
+          <div class="thumb">${thumbContent}</div>
+          <div class="info">
+            <span class="tag">${item.tag}</span>
+            <h3>${item.title}</h3>
+            <p>${item.desc.substring(0, 80)}...</p>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+    container.innerHTML = html;
+  }
+
+  // ========================================================
+  // SISTEM NAVIGASI / ROUTING
+  // ========================================================
+  function handleRouting() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && hash !== 'portfolio' && hash !== 'about' && hash !== 'services' && hash !== 'team' && hash !== 'contact') {
+      renderTalentDetail(hash);
+    } else {
+      renderGroups();
+    }
+  }
+
+  // Dengarkan perubahan URL hash
+  window.addEventListener('hashchange', handleRouting);
+  
+  // Render pertama kali saat halaman dimuat
+  window.addEventListener('DOMContentLoaded', () => {
+    handleRouting();
+    initCounter();
+  });
+
+  // ========================================================
+  // FUNGSI MODAL & SCROLL & COUNTER
+  // ========================================================
+  function openModal(title, desc, icon) {
+    const modalIcon = document.getElementById('modalIcon');
+
+    if (isImageFile(icon)) {
+      modalIcon.innerHTML = `<img src="assets/images/${icon}" alt="${title}" class="modal-img"
+        onerror="this.outerHTML='🖼️'">`;
+    } else {
+      modalIcon.textContent = icon;
+    }
+
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('modal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target.id === 'modal') closeModal();
+  });
+
+  function scrollToSection(id) {
+    if(window.location.hash !== '' && window.location.hash !== `#${id}`) {
+        window.location.hash = ''; 
+    }
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function initCounter() {
+    let counted = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !counted) {
+          counted = true;
+          document.querySelectorAll('.number').forEach(el => {
+            const target = +el.dataset.target;
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                el.textContent = target + '+';
+                clearInterval(timer);
+              } else {
+                el.textContent = Math.floor(current);
+              }
+            }, 30);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    const statsEl = document.querySelector('.about-stats');
+    if(statsEl) observer.observe(statsEl);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('✅ Terima kasih! Pesan Anda telah terkirim ke Panda Entertainment.');
+    e.target.reset();
+  }
+</script>
+
+</body>
+</html>
